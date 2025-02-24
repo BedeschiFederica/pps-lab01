@@ -13,6 +13,7 @@ class SimpleBankAccountTest {
     private static final int INITIAL_BALANCE = 0;
     private static final int DEPOSIT_AMOUNT = 100;
     private static final int WITHDRAW_AMOUNT = 70;
+    private static final int WITHDRAW_ILLEGAL_AMOUNT = 200;
 
     private AccountHolder accountHolder;
     private BankAccount bankAccount;
@@ -79,6 +80,13 @@ class SimpleBankAccountTest {
     void testWithdrawWithWrongId() {
         deposit();
         assertThrows(IllegalArgumentException.class, this::withdrawWithWrongId);
+    }
+
+    @Test
+    void testWithdrawWithIllegalAmount() {
+        deposit();
+        assertThrows(IllegalStateException.class,
+                () -> bankAccount.withdraw(accountHolder.getId(), WITHDRAW_ILLEGAL_AMOUNT));
     }
 
     @Test
