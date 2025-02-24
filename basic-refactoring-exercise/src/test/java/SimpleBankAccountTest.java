@@ -30,23 +30,23 @@ class SimpleBankAccountTest {
         assertNotEquals(this.accountHolder.getId(), anotherAccountHolder.getId());
     }
 
-    private void deposit() {
-        this.bankAccount.deposit(this.accountHolder.getId(), DEPOSIT_AMOUNT);
-    }
-
-    private void wrongDeposit() {
-        this.bankAccount.deposit(this.accountHolder.getId() + 1, DEPOSIT_AMOUNT);
-    }
-
     @Test
     void testInitialBalance() {
         assertEquals(INITIAL_BALANCE, this.bankAccount.getBalance());
+    }
+
+    private void deposit() {
+        this.bankAccount.deposit(this.accountHolder.getId(), DEPOSIT_AMOUNT);
     }
 
     @Test
     void testDeposit() {
         deposit();
         assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
+    }
+
+    private void wrongDeposit() {
+        this.bankAccount.deposit(this.accountHolder.getId() + 1, DEPOSIT_AMOUNT);
     }
 
     @Test
