@@ -18,6 +18,12 @@ public interface BankAccount {
     double getBalance();
 
     /**
+     * Return the withrawal fee
+     * @return the withdrawal fee
+     */
+    double getWithdrawFee();
+
+    /**
      * Allows the deposit of an amount on the account, if the given userID corresponds to the register holder ID
      * of the bank account. This ID acts like an "identification token" .
      *

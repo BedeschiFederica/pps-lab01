@@ -10,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SimpleBankAccountTest {
 
-    private static final int INITIAL_BALANCE = 0;
-    private static final int DEPOSIT_AMOUNT = 100;
-    private static final int WITHDRAW_AMOUNT = 70;
-    private static final int WITHDRAW_ILLEGAL_AMOUNT = 200;
+    private static final double INITIAL_BALANCE = 0;
+    private static final double DEPOSIT_AMOUNT = 100;
+    private static final double WITHDRAW_AMOUNT = 70;
+    private static final double WITHDRAW_ILLEGAL_AMOUNT = 200;
 
     private AccountHolder accountHolder;
     private BankAccount bankAccount;
@@ -69,7 +69,7 @@ class SimpleBankAccountTest {
     void testWithdraw() {
         deposit();
         this.bankAccount.withdraw(this.accountHolder.getId(), WITHDRAW_AMOUNT);
-        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT - SimpleBankAccount.WITHDRAW_FEE,
+        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT - this.bankAccount.getWithdrawFee(),
                 this.bankAccount.getBalance());
     }
 
