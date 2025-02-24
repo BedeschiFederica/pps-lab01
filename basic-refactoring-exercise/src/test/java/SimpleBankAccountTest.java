@@ -23,6 +23,12 @@ class SimpleBankAccountTest {
         bankAccount = new SimpleBankAccount(accountHolder, INITIAL_BALANCE);
     }
 
+    @Test
+    void testDifferentIdsForDifferentAccounts() {
+        final AccountHolder anotherAccountHolder = new AccountHolder("Maria", "Bianchi");
+        assertNotEquals(this.accountHolder.getId(), anotherAccountHolder.getId());
+    }
+
     private void deposit() {
         bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
     }

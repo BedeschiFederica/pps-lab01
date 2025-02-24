@@ -7,14 +7,22 @@ package example.model;
  * Each account holder has a name, a surname and an ID (unique in the bank system)
  */
 public class AccountHolder {
+    private static final int FIRST_ID = 0;
+    private static int globalId = FIRST_ID;
+
     private final int id;
     private final String name;
     private final String surname;
 
-    public AccountHolder(final String name, final String surname, final int id) {
+    public AccountHolder(final String name, final String surname) {
         this.name = name;
         this.surname = surname;
-        this.id = id;
+        this.id = AccountHolder.globalId;
+        incrementGlobalId();
+    }
+
+    private static void incrementGlobalId() {
+        AccountHolder.globalId++;
     }
 
     /**
