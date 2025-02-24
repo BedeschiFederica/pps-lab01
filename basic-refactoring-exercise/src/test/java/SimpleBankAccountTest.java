@@ -71,21 +71,21 @@ class SimpleBankAccountTest {
         assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT, bankAccount.getBalance());
     }
 
-    private void wrongWithdraw() {
+    private void withdrawWithWrongId() {
         bankAccount.withdraw(accountHolder.getId() + 1, WITHDRAW_AMOUNT);
     }
 
     @Test
-    void testWrongWithdraw() {
+    void testWithdrawWithWrongId() {
         deposit();
-        assertThrows(IllegalArgumentException.class, this::wrongWithdraw);
+        assertThrows(IllegalArgumentException.class, this::withdrawWithWrongId);
     }
 
     @Test
-    void testCorrectBalanceAfterWrongWithdraw() {
+    void testCorrectBalanceAfterWithdrawWithWrongId() {
         deposit();
         try {
-            wrongWithdraw();
+            withdrawWithWrongId();
         } catch (IllegalArgumentException e) {
         }
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
