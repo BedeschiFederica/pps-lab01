@@ -45,6 +45,8 @@ public class SimpleBankAccount implements BankAccount {
         checkUser(userID);
         if (isWithdrawAllowed(amount)) {
             this.balance -= amount;
+        } else {
+            throw new IllegalStateException("Not enough money to withdraw.");
         }
     }
 }
