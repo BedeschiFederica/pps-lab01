@@ -84,7 +84,10 @@ class SimpleBankAccountTest {
     @Test
     void testCorrectBalanceAfterWrongWithdraw() {
         deposit();
-        wrongWithdraw();
+        try {
+            wrongWithdraw();
+        } catch (IllegalArgumentException e) {
+        }
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
     }
 }
