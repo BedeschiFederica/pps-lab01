@@ -7,6 +7,8 @@ package example.model;
  */
 public class SimpleBankAccount implements BankAccount {
 
+    public static final int WITHDRAW_FEE = 1;
+
     private double balance;
     private final AccountHolder holder;
 
@@ -45,6 +47,7 @@ public class SimpleBankAccount implements BankAccount {
         checkUser(userID);
         if (isWithdrawAllowed(amount)) {
             this.balance -= amount;
+            this.balance -= WITHDRAW_FEE;
         } else {
             throw new IllegalStateException("Not enough money to withdraw.");
         }
