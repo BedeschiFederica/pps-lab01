@@ -24,25 +24,27 @@ public class SimpleBankAccount implements BankAccount {
         return this.balance;
     }
 
+    private void checkUser(final int id) {
+        if (this.holder.getId() != id) {
+            throw new IllegalArgumentException("User ID does not match.");
+        }
+    }
+
     @Override
     public void deposit(final int userID, final double amount) {
-        if (checkUser(userID)) {
-            this.balance += amount;
-        }
+        checkUser(userID);
+        this.balance += amount;
+    }
+
+    private boolean isWithdrawAllowed(final double amount) {
+        return this.balance >= amount;
     }
 
     @Override
     public void withdraw(final int userID, final double amount) {
-        if (checkUser(userID) && isWithdrawAllowed(amount)) {
+        checkUser(userID);
+        if (isWithdrawAllowed(amount)) {
             this.balance -= amount;
         }
-    }
-
-    private boolean isWithdrawAllowed(final double amount){
-        return this.balance >= amount;
-    }
-
-    private boolean checkUser(final int id) {
-        return this.holder.getId() == id;
     }
 }

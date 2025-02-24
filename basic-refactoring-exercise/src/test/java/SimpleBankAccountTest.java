@@ -33,6 +33,10 @@ class SimpleBankAccountTest {
         bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
     }
 
+    private void wrongDeposit() {
+        bankAccount.deposit(accountHolder.getId() + 1, DEPOSIT_AMOUNT);
+    }
+
     @Test
     void testInitialBalance() {
         assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
@@ -45,9 +49,15 @@ class SimpleBankAccountTest {
     }
 
     @Test
+    void testWrongDeposit() {
+        deposit();
+        assertThrows(IllegalArgumentException.class, this::wrongDeposit);
+    }
+
+    @Test
     void testCorrectBalanceAfterWrongDeposit() {
         deposit();
-        bankAccount.deposit(accountHolder.getId() + 1, DEPOSIT_AMOUNT);
+        wrongDeposit();
         assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
     }
 
