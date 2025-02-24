@@ -4,10 +4,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     private boolean locked = false;
     private int pin;
+    private boolean isPinSet  = false;
 
     @Override
     public void setPin(final int pin) {
         this.pin = pin;
+        isPinSet = true;
     }
 
     @Override
@@ -17,6 +19,9 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void lock() {
+        if (!isPinSet) {
+            throw new IllegalStateException("Pin is not set.");
+        }
         this.locked = true;
     }
 

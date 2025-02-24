@@ -28,4 +28,9 @@ public class SmartDoorLockTest {
         smartDoorLock.lock();
         assertTrue(smartDoorLock.isLocked());
     }
+
+    @Test
+    public void cantLockIfPinNotSet() {
+        assertThrows(IllegalStateException.class, () -> smartDoorLock.lock());
+    }
 }
