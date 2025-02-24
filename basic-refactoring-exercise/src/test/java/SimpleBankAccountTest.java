@@ -99,4 +99,12 @@ class SimpleBankAccountTest {
         }
         assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
+
+    @Test
+    void testWithdrawSameAmountOfBalance() {
+        deposit();
+        assertThrows(IllegalStateException.class,
+                () -> this.bankAccount.withdraw(this.accountHolder.getId(), DEPOSIT_AMOUNT));
+    }
+
 }
