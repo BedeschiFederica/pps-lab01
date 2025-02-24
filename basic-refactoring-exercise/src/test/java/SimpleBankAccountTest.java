@@ -20,8 +20,8 @@ class SimpleBankAccountTest {
 
     @BeforeEach
     void beforeEach(){
-        accountHolder = new AccountHolder("Mario", "Rossi");
-        bankAccount = new SimpleBankAccount(accountHolder, INITIAL_BALANCE);
+        this.accountHolder = new AccountHolder("Mario", "Rossi");
+        this.bankAccount = new SimpleBankAccount(this.accountHolder, INITIAL_BALANCE);
     }
 
     @Test
@@ -31,22 +31,22 @@ class SimpleBankAccountTest {
     }
 
     private void deposit() {
-        bankAccount.deposit(accountHolder.getId(), DEPOSIT_AMOUNT);
+        this.bankAccount.deposit(this.accountHolder.getId(), DEPOSIT_AMOUNT);
     }
 
     private void wrongDeposit() {
-        bankAccount.deposit(accountHolder.getId() + 1, DEPOSIT_AMOUNT);
+        this.bankAccount.deposit(this.accountHolder.getId() + 1, DEPOSIT_AMOUNT);
     }
 
     @Test
     void testInitialBalance() {
-        assertEquals(INITIAL_BALANCE, bankAccount.getBalance());
+        assertEquals(INITIAL_BALANCE, this.bankAccount.getBalance());
     }
 
     @Test
     void testDeposit() {
         deposit();
-        assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
+        assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
 
     @Test
@@ -62,18 +62,18 @@ class SimpleBankAccountTest {
             wrongDeposit();
         } catch (IllegalArgumentException e) {
         }
-        assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
+        assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
 
     @Test
     void testWithdraw() {
         deposit();
-        bankAccount.withdraw(accountHolder.getId(), WITHDRAW_AMOUNT);
-        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT, bankAccount.getBalance());
+        this.bankAccount.withdraw(this.accountHolder.getId(), WITHDRAW_AMOUNT);
+        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT, this.bankAccount.getBalance());
     }
 
     private void withdrawWithWrongId() {
-        bankAccount.withdraw(accountHolder.getId() + 1, WITHDRAW_AMOUNT);
+        this.bankAccount.withdraw(this.accountHolder.getId() + 1, WITHDRAW_AMOUNT);
     }
 
     @Test
@@ -86,7 +86,7 @@ class SimpleBankAccountTest {
     void testWithdrawWithIllegalAmount() {
         deposit();
         assertThrows(IllegalStateException.class,
-                () -> bankAccount.withdraw(accountHolder.getId(), WITHDRAW_ILLEGAL_AMOUNT));
+                () -> this.bankAccount.withdraw(this.accountHolder.getId(), WITHDRAW_ILLEGAL_AMOUNT));
     }
 
     @Test
@@ -96,6 +96,6 @@ class SimpleBankAccountTest {
             withdrawWithWrongId();
         } catch (IllegalArgumentException e) {
         }
-        assertEquals(DEPOSIT_AMOUNT, bankAccount.getBalance());
+        assertEquals(DEPOSIT_AMOUNT, this.bankAccount.getBalance());
     }
 }
