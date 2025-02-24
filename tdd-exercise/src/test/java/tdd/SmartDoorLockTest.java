@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SmartDoorLockTest {
 
     private static final int INITIAL_PIN = 1234;
+    private static final int ILLEGAL_PIN = 12345;
 
     private SmartDoorLock smartDoorLock;
     private int pin = INITIAL_PIN;
@@ -32,5 +33,10 @@ public class SmartDoorLockTest {
     @Test
     public void cantLockIfPinNotSet() {
         assertThrows(IllegalStateException.class, () -> smartDoorLock.lock());
+    }
+
+    @Test
+    public void setIllegalPin() {
+        assertThrows(IllegalArgumentException.class, () -> smartDoorLock.setPin(ILLEGAL_PIN));
     }
 }
