@@ -69,7 +69,8 @@ class SimpleBankAccountTest {
     void testWithdraw() {
         deposit();
         this.bankAccount.withdraw(this.accountHolder.getId(), WITHDRAW_AMOUNT);
-        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT - 1, this.bankAccount.getBalance());
+        assertEquals(DEPOSIT_AMOUNT - WITHDRAW_AMOUNT - SimpleBankAccount.WITHDRAW_FEE,
+                this.bankAccount.getBalance());
     }
 
     private void withdrawWithWrongId() {
