@@ -10,6 +10,7 @@ public class SmartDoorLockTest {
     private static final int INITIAL_PIN = 1234;
     private static final int ILLEGAL_PIN = 12345;
     private static final int WRONG_PIN = 1111;
+    private static final int NEW_PIN = 4321;
 
     private SmartDoorLock smartDoorLock;
     private int pin = INITIAL_PIN;
@@ -106,6 +107,15 @@ public class SmartDoorLockTest {
         lock();
         block();
         assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(this.pin));
+    }
+
+    @Test
+    public void canSetPinAfterReset() {
+        lock();
+        block();
+        this.smartDoorLock.reset();
+        this.smartDoorLock.setPin(this.pin);
+        assertDoesNotThrow(() -> this.smartDoorLock.setPin(this.pin));
     }
 
 }
