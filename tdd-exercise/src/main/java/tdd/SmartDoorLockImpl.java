@@ -33,15 +33,19 @@ public class SmartDoorLockImpl implements SmartDoorLock {
         isPinSet = true;
     }
 
+    private void blockIfNecessary() {
+        if (this.failedAttempts == MAX_ATTEMPTS) {
+            this.blocked = true;
+        }
+    }
+
     @Override
     public void unlock(final int pin) {
         if (pin == this.pin) {
             this.locked = false;
         } else {
             this.failedAttempts++;
-            if (this.failedAttempts == MAX_ATTEMPTS) {
-                this.blocked = true;
-            }
+            blockIfNecessary();
         }
     }
 
