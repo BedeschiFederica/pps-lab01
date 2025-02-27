@@ -31,7 +31,7 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public void unlock(final int pin) {
-
+        this.locked = false;
     }
 
     @Override
