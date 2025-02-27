@@ -66,4 +66,13 @@ public class SmartDoorLockTest {
         assertTrue(smartDoorLock.isLocked());
     }
 
+    @Test
+    public void canBlock() {
+        lock();
+        for (int i = 0; i < smartDoorLock.getMaxAttempts(); i++) {
+            smartDoorLock.unlock(WRONG_PIN);
+        }
+        assertTrue(smartDoorLock.isBlocked());
+    }
+
 }

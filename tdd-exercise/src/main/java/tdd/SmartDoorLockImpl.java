@@ -4,10 +4,14 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     private static final int MIN_PIN = 0;
     private static final int MAX_PIN = 9999;
+    private static final int MAX_ATTEMPTS = 3;
 
+    private boolean blocked = false;
     private boolean locked = false;
     private int pin;
     private boolean isPinSet  = false;
+    private int failedAttempts = 0;
+
 
     private void checkPin(final int pin) {
         if (pin < MIN_PIN || pin > MAX_PIN) {
@@ -33,6 +37,11 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     public void unlock(final int pin) {
         if (pin == this.pin) {
             this.locked = false;
+        } else {
+            this.failedAttempts++;
+            if (this.failedAttempts == MAX_ATTEMPTS) {
+                this.blocked = true;
+            }
         }
     }
 
@@ -51,12 +60,12 @@ public class SmartDoorLockImpl implements SmartDoorLock {
 
     @Override
     public boolean isBlocked() {
-        return false;
+        return this.blocked;
     }
 
     @Override
     public int getMaxAttempts() {
-        return 0;
+        return MAX_ATTEMPTS;
     }
 
     @Override
