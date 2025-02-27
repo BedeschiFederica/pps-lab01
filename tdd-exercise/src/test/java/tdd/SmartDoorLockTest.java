@@ -7,13 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SmartDoorLockTest {
 
-    private static final int INITIAL_PIN = 1234;
+    private static final int PIN = 1234;
     private static final int ILLEGAL_PIN = 12345;
     private static final int WRONG_PIN = 1111;
-    private static final int NEW_PIN = 4321;
 
     private SmartDoorLock smartDoorLock;
-    private int pin = INITIAL_PIN;
 
     @BeforeEach
     public void beforeEach() {
@@ -26,7 +24,7 @@ public class SmartDoorLockTest {
     }
 
     private void lock() {
-        this.smartDoorLock.setPin(this.pin);
+        this.smartDoorLock.setPin(PIN);
         this.smartDoorLock.lock();
     }
 
@@ -49,13 +47,13 @@ public class SmartDoorLockTest {
     @Test
     public void cantSetPinWhenLocked() {
         lock();
-        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(this.pin));
+        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(PIN));
     }
 
     @Test
     public void canUnlock() {
         lock();
-        this.smartDoorLock.unlock(this.pin);
+        this.smartDoorLock.unlock(PIN);
         assertFalse(this.smartDoorLock.isLocked());
     }
 
@@ -106,7 +104,7 @@ public class SmartDoorLockTest {
     public void cantSetPinWhenBlocked() {
         lock();
         block();
-        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(this.pin));
+        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(PIN));
     }
 
     @Test
@@ -114,8 +112,8 @@ public class SmartDoorLockTest {
         lock();
         block();
         this.smartDoorLock.reset();
-        this.smartDoorLock.setPin(this.pin);
-        assertDoesNotThrow(() -> this.smartDoorLock.setPin(this.pin));
+        this.smartDoorLock.setPin(PIN);
+        assertDoesNotThrow(() -> this.smartDoorLock.setPin(PIN));
     }
 
 }
