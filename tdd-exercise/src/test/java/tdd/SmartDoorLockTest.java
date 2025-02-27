@@ -23,6 +23,11 @@ public class SmartDoorLockTest {
         assertFalse(this.smartDoorLock.isLocked());
     }
 
+    @Test
+    public void setIllegalPin() {
+        assertThrows(IllegalArgumentException.class, () -> this.smartDoorLock.setPin(ILLEGAL_PIN));
+    }
+
     private void lock() {
         this.smartDoorLock.setPin(PIN);
         this.smartDoorLock.lock();
@@ -37,11 +42,6 @@ public class SmartDoorLockTest {
     @Test
     public void cantLockIfPinNotSet() {
         assertThrows(IllegalStateException.class, () -> this.smartDoorLock.lock());
-    }
-
-    @Test
-    public void setIllegalPin() {
-        assertThrows(IllegalArgumentException.class, () -> this.smartDoorLock.setPin(ILLEGAL_PIN));
     }
 
     @Test
@@ -64,6 +64,15 @@ public class SmartDoorLockTest {
         assertTrue(this.smartDoorLock.isLocked());
     }
 
+    @Test
+    public void getNumberOfFailedAttempts() {
+        lock();
+        for (int i = 0; i < this.smartDoorLock.getMaxAttempts() - 1; i++) {
+            this.smartDoorLock.unlock(WRONG_PIN);
+        }
+        assertEquals(this.smartDoorLock.getMaxAttempts() - 1, this.smartDoorLock.getFailedAttempts());
+    }
+
     private void block() {
         for (int i = 0; i < this.smartDoorLock.getMaxAttempts(); i++) {
             this.smartDoorLock.unlock(WRONG_PIN);
@@ -78,12 +87,10 @@ public class SmartDoorLockTest {
     }
 
     @Test
-    public void getNumberOfFailedAttempts() {
+    public void cantSetPinWhenBlocked() {
         lock();
-        for (int i = 0; i < this.smartDoorLock.getMaxAttempts() - 1; i++) {
-            this.smartDoorLock.unlock(WRONG_PIN);
-        }
-        assertEquals(this.smartDoorLock.getMaxAttempts() - 1, this.smartDoorLock.getFailedAttempts());
+        block();
+        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(PIN));
     }
 
     @Test
@@ -98,13 +105,6 @@ public class SmartDoorLockTest {
                     assertEquals(0, this.smartDoorLock.getFailedAttempts());
                 }
         );
-    }
-
-    @Test
-    public void cantSetPinWhenBlocked() {
-        lock();
-        block();
-        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(PIN));
     }
 
     @Test
