@@ -20,8 +20,8 @@ public class SmartDoorLockImpl implements SmartDoorLock {
     }
 
     private void checkState() {
-        if (this.locked) {
-            throw new IllegalStateException("Can't set pin when locked.");
+        if (this.locked || this.blocked) {
+            throw new IllegalStateException("Can't set pin when the system isn't open (locked or blocked).");
         }
     }
 

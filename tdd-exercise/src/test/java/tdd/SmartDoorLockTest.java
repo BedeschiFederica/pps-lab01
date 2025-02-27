@@ -101,4 +101,11 @@ public class SmartDoorLockTest {
         );
     }
 
+    @Test
+    public void cantSetPinWhenBlocked() {
+        lock();
+        block();
+        assertThrows(IllegalStateException.class, () -> this.smartDoorLock.setPin(this.pin));
+    }
+
 }
