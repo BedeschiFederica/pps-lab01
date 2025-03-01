@@ -11,5 +11,13 @@ class MinMaxStackImplTest {
         MinMaxStack stack = new MinMaxStackImpl();
         assertTrue(stack.isEmpty());
     }
-    
+
+    @Test
+    public void canPushAndPeek() {
+        MinMaxStack stack = new MinMaxStackImpl();
+        stack.push(1);
+        stack.push(2);
+        assertEquals(2, stack.peek());
+    }
+
 }

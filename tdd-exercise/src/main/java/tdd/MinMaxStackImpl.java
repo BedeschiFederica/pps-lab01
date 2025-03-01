@@ -1,10 +1,15 @@
 package tdd;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class MinMaxStackImpl implements MinMaxStack {
 
-    @Override
-    public void push(int value) {
+    Deque<Integer> stack = new ArrayDeque<Integer>();
 
+    @Override
+    public void push(final int value) {
+        this.stack.push(value);
     }
 
     @Override
@@ -14,7 +19,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
-        return 0;
+        return this.stack.peek();
     }
 
     @Override
