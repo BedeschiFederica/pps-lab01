@@ -41,4 +41,16 @@ class MinMaxStackImplTest {
         assertThrows(IllegalStateException.class, () -> this.stack.peek());
     }
 
+    @Test
+    public void canPushAndPop() {
+        this.stack.push(FIRST_VALUE);
+        this.stack.push(SECOND_VALUE);
+        assertAll(
+                () -> {
+                    assertEquals(SECOND_VALUE, this.stack.pop());
+                    assertEquals(FIRST_VALUE, this.stack.peek());
+                }
+        );
+    }
+
 }
