@@ -24,16 +24,16 @@ class MinMaxStackImplTest {
     }
 
     @Test
+    public void IsNotEmptyAfterPush() {
+        this.stack.push(FIRST_VALUE);
+        assertFalse(this.stack.isEmpty());
+    }
+
+    @Test
     public void canPushAndPeek() {
         this.stack.push(FIRST_VALUE);
         this.stack.push(SECOND_VALUE);
         assertEquals(SECOND_VALUE, this.stack.peek());
-    }
-
-    @Test
-    public void IsNotEmptyAfterPush() {
-        this.stack.push(FIRST_VALUE);
-        assertFalse(this.stack.isEmpty());
     }
 
 }
