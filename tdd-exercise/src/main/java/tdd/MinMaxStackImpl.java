@@ -9,15 +9,18 @@ public class MinMaxStackImpl implements MinMaxStack {
     private Deque<Integer> stack = new ArrayDeque<>();
     private Deque<Integer> minStack = new ArrayDeque<>();
 
-    @Override
-    public void push(final int value) {
-        this.stack.push(value);
-
+    private void updateMinStack(final int value) {
         if (minStack.isEmpty() || value < minStack.peek()) {
             minStack.push(value);
         } else {
             minStack.push(minStack.peek());
         }
+    }
+
+    @Override
+    public void push(final int value) {
+        this.stack.push(value);
+        updateMinStack(value);
     }
 
     @Override
