@@ -58,4 +58,12 @@ class MinMaxStackImplTest {
         assertThrows(IllegalStateException.class, () -> this.stack.pop());
     }
 
+    @Test
+    public void getCorrectSize() {
+        this.stack.push(FIRST_VALUE);
+        this.stack.push(SECOND_VALUE);
+        this.stack.pop();
+        assertEquals(1, this.stack.size());
+    }
+
 }

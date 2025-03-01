@@ -47,6 +47,6 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int size() {
-        return 0;
+        return this.stack.size();
     }
 }
