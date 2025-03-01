@@ -25,11 +25,11 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int pop() {
-        try {
-            return this.stack.pop();
-        } catch (NoSuchElementException e) {
+        if (this.stack.isEmpty()) {
             throw new IllegalStateException("Can't pop when the stack is empty.");
         }
+        this.minStack.pop();
+        return this.stack.pop();
     }
 
     @Override

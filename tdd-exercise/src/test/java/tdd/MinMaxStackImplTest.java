@@ -75,9 +75,17 @@ class MinMaxStackImplTest {
     }
 
     @Test
-    public void getCorrectMinValue() {
+    public void getCorrectMinValueAfterPush() {
         pushThreeValues();
         assertEquals(Collections.min(Arrays.asList(FIRST_VALUE, SECOND_VALUE, THIRD_VALUE)), this.stack.getMin());
+    }
+
+    @Test
+    public void getCorrectMinValueAfterPoppingTheMin() {
+        pushThreeValues();
+        this.stack.pop();
+        this.stack.pop();
+        assertEquals(Collections.min(Arrays.asList(FIRST_VALUE)), this.stack.getMin());
     }
 
 }
