@@ -3,6 +3,9 @@ package tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinMaxStackImplTest {
@@ -69,6 +72,12 @@ class MinMaxStackImplTest {
         pushThreeValues();
         this.stack.pop();
         assertEquals(EXPECTED_SIZE, this.stack.size());
+    }
+
+    @Test
+    public void getCorrectMinValue() {
+        pushThreeValues();
+        assertEquals(Collections.min(Arrays.asList(FIRST_VALUE, SECOND_VALUE, THIRD_VALUE)), this.stack.getMin());
     }
 
 }

@@ -6,11 +6,18 @@ import java.util.NoSuchElementException;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
-    Deque<Integer> stack = new ArrayDeque<Integer>();
+    private Deque<Integer> stack = new ArrayDeque<>();
+    private Deque<Integer> minStack = new ArrayDeque<>();
 
     @Override
     public void push(final int value) {
         this.stack.push(value);
+
+        if (minStack.isEmpty() || value < minStack.peek()) {
+            minStack.push(value);
+        } else {
+            minStack.push(minStack.peek());
+        }
     }
 
     @Override
@@ -32,7 +39,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMin() {
-        return 0;
+        return this.minStack.peek();
     }
 
     @Override
