@@ -8,8 +8,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class MinMaxStackImplTest {
 
 
-    public static final int FIRST_VALUE = 1;
-    public static final int SECOND_VALUE = 2;
+    public static final int FIRST_VALUE = 10;
+    public static final int SECOND_VALUE = 5;
+    public static final int THIRD_VALUE = 8;
+    public static final int EXPECTED_SIZE = 2;
 
     MinMaxStack stack;
 
@@ -29,11 +31,16 @@ class MinMaxStackImplTest {
         assertFalse(this.stack.isEmpty());
     }
 
-    @Test
-    public void canPushAndPeek() {
+    private void pushThreeValues() {
         this.stack.push(FIRST_VALUE);
         this.stack.push(SECOND_VALUE);
-        assertEquals(SECOND_VALUE, this.stack.peek());
+        this.stack.push(THIRD_VALUE);
+    }
+
+    @Test
+    public void canPushAndPeek() {
+        pushThreeValues();
+        assertEquals(THIRD_VALUE, this.stack.peek());
     }
 
     @Test
@@ -43,12 +50,11 @@ class MinMaxStackImplTest {
 
     @Test
     public void canPushAndPop() {
-        this.stack.push(FIRST_VALUE);
-        this.stack.push(SECOND_VALUE);
+        pushThreeValues();
         assertAll(
                 () -> {
-                    assertEquals(SECOND_VALUE, this.stack.pop());
-                    assertEquals(FIRST_VALUE, this.stack.peek());
+                    assertEquals(THIRD_VALUE, this.stack.pop());
+                    assertEquals(SECOND_VALUE, this.stack.peek());
                 }
         );
     }
@@ -60,10 +66,9 @@ class MinMaxStackImplTest {
 
     @Test
     public void getCorrectSize() {
-        this.stack.push(FIRST_VALUE);
-        this.stack.push(SECOND_VALUE);
+        pushThreeValues();
         this.stack.pop();
-        assertEquals(1, this.stack.size());
+        assertEquals(EXPECTED_SIZE, this.stack.size());
     }
 
 }
