@@ -30,4 +30,10 @@ class MinMaxStackImplTest {
         assertEquals(SECOND_VALUE, this.stack.peek());
     }
 
+    @Test
+    public void IsNotEmptyAfterPush() {
+        this.stack.push(FIRST_VALUE);
+        assertFalse(this.stack.isEmpty());
+    }
+
 }
