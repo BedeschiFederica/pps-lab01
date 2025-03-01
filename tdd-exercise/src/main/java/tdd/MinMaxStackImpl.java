@@ -2,6 +2,7 @@ package tdd;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
@@ -14,7 +15,11 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int pop() {
-        return this.stack.pop();
+        try {
+            return this.stack.pop();
+        } catch (NoSuchElementException e) {
+            throw new IllegalStateException("Can't pop when the stack is empty.");
+        }
     }
 
     @Override

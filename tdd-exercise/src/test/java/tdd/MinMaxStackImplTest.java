@@ -53,4 +53,9 @@ class MinMaxStackImplTest {
         );
     }
 
+    @Test
+    public void cantPopIfEmpty() {
+        assertThrows(IllegalStateException.class, () -> this.stack.pop());
+    }
+
 }
