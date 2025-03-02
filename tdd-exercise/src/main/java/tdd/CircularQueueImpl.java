@@ -32,7 +32,7 @@ public class CircularQueueImpl implements CircularQueue {
 
     private void updateIndexes() {
         incrementLastIndex();
-        if (this.lastIndex == this.firstIndex) {
+        if (this.currentSize == this.maxSize) {
             incrementFirstIndex();
         }
     }

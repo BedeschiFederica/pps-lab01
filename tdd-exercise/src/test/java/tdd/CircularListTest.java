@@ -150,14 +150,26 @@ public class CircularListTest {
         assertEquals(MAX_SIZE - N_REMOVE_FOR_CURRENT_SIZE, this.circularQueue.getCurrentSize());
     }
 
+    private void emptyTheQueue() {
+        for (int i = 0; i < MAX_SIZE; i++) {
+            this.circularQueue.remove();
+        }
+    }
+
     @Test
     public void canEmptyTheQueue() {
         addMaxSizeValues(START);
         addMaxSizeValues(MAX_SIZE);
-        for (int i = 0; i < MAX_SIZE; i++) {
-            this.circularQueue.remove();
-        }
+        emptyTheQueue();
         assertTrue(this.circularQueue.isEmpty());
+    }
+
+    @Test
+    public void canEmptyAndRefillTheQueue() {
+        addMaxSizeValues(START);
+        emptyTheQueue();
+        addMaxSizeValues(MAX_SIZE);
+        assertEquals(VALUES.get(MAX_SIZE), this.circularQueue.peek());
     }
 
 }
