@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CircularQueueImpl implements CircularQueue {
 
-    private List<Integer> circularQueue = new ArrayList<>();
+    private final List<Integer> circularQueue = new ArrayList<>();
 
     @Override
     public boolean isEmpty() {
