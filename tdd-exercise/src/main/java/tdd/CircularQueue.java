@@ -36,5 +36,12 @@ public interface CircularQueue {
      */
     int getMaxSize();
 
+    /**
+     * Retrieves, but does not remove, the first element of the circular queue.
+     *
+     * @return The first element of the circular queue.
+     * @throws IllegalStateException if the circular queue is empty.
+     */
     int peek();
+
 }
