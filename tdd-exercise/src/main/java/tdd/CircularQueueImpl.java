@@ -76,7 +76,7 @@ public class CircularQueueImpl implements CircularQueue {
     @Override
     public int remove() {
         final int value = this.peek();
-        this.firstIndex++;
+        this.incrementFirstIndex();
         this.currentSize--;
         return value;
     }

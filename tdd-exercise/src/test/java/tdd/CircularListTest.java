@@ -18,6 +18,7 @@ public class CircularListTest {
     private static final int MAX_SIZE = 3;
     private static final int START = 0;
     private static final int N_REMOVE = 2;
+    private static final int N_REMOVE_WHEN_OVERFLOWED = MAX_SIZE - 1;
 
     private CircularQueue circularQueue;
 
@@ -120,6 +121,21 @@ public class CircularListTest {
                 () -> {
                     assertEquals(VALUES.get(MAX_SIZE + 1), this.circularQueue.remove());
                     assertEquals(VALUES.get(MAX_SIZE + 2), this.circularQueue.peek());
+                }
+        );
+    }
+
+    @Test
+    public void canRemoveMultipleTimesWhenOverflowed() {
+        addMaxSizeValues(START);
+        this.circularQueue.add(VALUES.get(MAX_SIZE));
+        for (int i = 0; i < N_REMOVE_WHEN_OVERFLOWED - 1; i++) {
+            this.circularQueue.remove();
+        }
+        assertAll(
+                () -> {
+                    assertEquals(VALUES.get(MAX_SIZE - 1), this.circularQueue.remove());
+                    assertEquals(VALUES.get(MAX_SIZE), this.circularQueue.peek());
                 }
         );
     }
