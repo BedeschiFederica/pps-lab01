@@ -63,4 +63,9 @@ public class CircularListTest {
         );
     }
 
+    @Test
+    public void cantRemoveIfEmpty() {
+        assertThrows(IllegalStateException.class, () -> this.circularQueue.remove());
+    }
+
 }

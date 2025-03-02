@@ -40,6 +40,9 @@ public class CircularQueueImpl implements CircularQueue {
 
     @Override
     public int remove() {
+        if (this.currentSize == 0) {
+            throw new IllegalStateException("Can't remove when the circular queue is empty.");
+        }
         final int value = this.circularQueue.get(firstIndex);
         firstIndex++;
         return value;
