@@ -16,33 +16,11 @@ package tdd;
 public interface CircularQueue {
 
     /**
-     * Checks if the circular queue is empty.
-     *
-     * @return true if the circular queue is empty, false otherwise.
-     */
-    boolean isEmpty();
-
-    /**
      * Adds an integer to the circular queue.
      *
      * @param value The integer to add
      */
     void add(int value);
-
-    /**
-     * Gets the maximum size of the circular queue.
-     *
-     * @return The maximum size of the circular queue.
-     */
-    int getMaxSize();
-
-    /**
-     * Retrieves, but does not remove, the first element of the circular queue.
-     *
-     * @return The first element of the circular queue.
-     * @throws IllegalStateException if the circular queue is empty.
-     */
-    int peek();
 
     /**
      * Removes and returns the first element of the circular queue.
@@ -53,10 +31,32 @@ public interface CircularQueue {
     int remove();
 
     /**
+     * Retrieves, but does not remove, the first element of the circular queue.
+     *
+     * @return The first element of the circular queue.
+     * @throws IllegalStateException if the circular queue is empty.
+     */
+    int peek();
+
+    /**
+     * Checks if the circular queue is empty.
+     *
+     * @return true if the circular queue is empty, false otherwise.
+     */
+    boolean isEmpty();
+
+    /**
      * Gets the current size of the circular queue.
      *
      * @return The current size of the circular queue.
      */
     int getCurrentSize();
+
+    /**
+     * Gets the maximum size of the circular queue.
+     *
+     * @return The maximum size of the circular queue.
+     */
+    int getMaxSize();
 
 }

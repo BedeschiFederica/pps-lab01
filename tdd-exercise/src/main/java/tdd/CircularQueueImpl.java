@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class CircularQueueImpl implements CircularQueue {
 
-    private final List<Integer> circularQueue = new ArrayList<>();
+    private final List<Integer> circularQueue;
     private final int maxSize;
     private int currentSize = 0;
     private int firstIndex = 0;
@@ -13,11 +13,7 @@ public class CircularQueueImpl implements CircularQueue {
 
     public CircularQueueImpl(final int maxSize) {
         this.maxSize = maxSize;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return this.currentSize == 0;
+        this.circularQueue = new ArrayList<>(this.maxSize);
     }
 
     private void incrementFirstIndex() {
@@ -63,11 +59,6 @@ public class CircularQueueImpl implements CircularQueue {
         updateCurrentSize();
     }
 
-    @Override
-    public int getMaxSize() {
-        return this.maxSize;
-    }
-
     private void checkIfEmpty() {
         if (this.isEmpty()) {
             throw new IllegalStateException("Can't perform the operation when the circular queue is empty.");
@@ -89,8 +80,18 @@ public class CircularQueueImpl implements CircularQueue {
     }
 
     @Override
+    public boolean isEmpty() {
+        return this.currentSize == 0;
+    }
+
+    @Override
     public int getCurrentSize() {
         return this.currentSize;
+    }
+
+    @Override
+    public int getMaxSize() {
+        return this.maxSize;
     }
 
 }

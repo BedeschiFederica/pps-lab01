@@ -28,6 +28,11 @@ public class CircularListTest {
     }
 
     @Test
+    public void getMaxSize() {
+        assertEquals(MAX_SIZE, this.circularQueue.getMaxSize());
+    }
+
+    @Test
     public void isInitiallyEmpty() {
         assertTrue(this.circularQueue.isEmpty());
     }
@@ -42,11 +47,6 @@ public class CircularListTest {
         for (int i = from; i < from + MAX_SIZE; i++) {
             this.circularQueue.add(VALUES.get(i));
         }
-    }
-
-    @Test
-    public void getMaxSize() {
-        assertEquals(MAX_SIZE, this.circularQueue.getMaxSize());
     }
 
     @Test
