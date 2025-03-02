@@ -34,7 +34,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     private void checkIfStackEmpty() {
         if (this.stack.isEmpty()) {
-            throw new IllegalStateException("Can't pop when the stack is empty.");
+            throw new IllegalStateException("Can't perform the operation when the stack is empty.");
         }
     }
 
