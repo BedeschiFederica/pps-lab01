@@ -94,4 +94,10 @@ class MinMaxStackImplTest {
         this.stack.pop();
         assertEquals(Collections.min(VALUES), this.stack.getMin());
     }
+
+    @Test
+    public void cantGetMinValueIfEmpty() {
+        assertThrows(IllegalStateException.class, () -> this.stack.getMin());
+    }
+
 }
