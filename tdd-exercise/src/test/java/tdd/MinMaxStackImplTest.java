@@ -100,4 +100,12 @@ class MinMaxStackImplTest {
         assertThrows(IllegalStateException.class, () -> this.stack.getMin());
     }
 
+    @Test
+    public void getCorrectMaxValueAfterPush() {
+        pushValues();
+        this.stack.push(MAX_VALUE);
+        this.stack.push(MIN_VALUE);
+        assertEquals(MAX_VALUE, this.stack.getMax());
+    }
+
 }

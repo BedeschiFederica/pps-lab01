@@ -8,12 +8,21 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     private Deque<Integer> stack = new ArrayDeque<>();
     private Deque<Integer> minStack = new ArrayDeque<>();
+    private Deque<Integer> maxStack = new ArrayDeque<>();
 
     private void updateMinStack(final int value) {
-        if (minStack.isEmpty() || value < minStack.peek()) {
-            minStack.push(value);
+        if (this.minStack.isEmpty() || value < this.minStack.peek()) {
+            this.minStack.push(value);
         } else {
-            minStack.push(minStack.peek());
+            this.minStack.push(this.minStack.peek());
+        }
+    }
+
+    private void updateMaxStack(final int value) {
+        if (this.maxStack.isEmpty() || value > this.maxStack.peek()) {
+            this.maxStack.push(value);
+        } else {
+            this.maxStack.push(this.maxStack.peek());
         }
     }
 
@@ -21,6 +30,7 @@ public class MinMaxStackImpl implements MinMaxStack {
     public void push(final int value) {
         this.stack.push(value);
         updateMinStack(value);
+        updateMaxStack(value);
     }
 
     @Override
@@ -50,7 +60,7 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMax() {
-        return 0;
+        return this.maxStack.peek();
     }
 
     @Override
