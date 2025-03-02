@@ -40,4 +40,10 @@ public class CircularListTest {
         assertEquals(MAX_SIZE, this.circularQueue.getMaxSize());
     }
 
+    @Test
+    public void canAddAndPeek() {
+        this.circularQueue.add(VALUES.get(0));
+        assertEquals(VALUES.get(0), this.circularQueue.peek());
+    }
+
 }

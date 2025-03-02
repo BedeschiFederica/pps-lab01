@@ -36,4 +36,5 @@ public interface CircularQueue {
      */
     int getMaxSize();
 
+    int peek();
 }

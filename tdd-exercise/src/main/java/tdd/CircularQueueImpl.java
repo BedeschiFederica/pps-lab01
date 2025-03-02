@@ -7,6 +7,7 @@ public class CircularQueueImpl implements CircularQueue {
 
     private final List<Integer> circularQueue = new ArrayList<>();
     private final int maxSize;
+    private int firstIndex;
 
     public CircularQueueImpl(final int maxSize) {
         this.maxSize = maxSize;
@@ -25,6 +26,11 @@ public class CircularQueueImpl implements CircularQueue {
     @Override
     public int getMaxSize() {
         return this.maxSize;
+    }
+
+    @Override
+    public int peek() {
+        return this.circularQueue.get(firstIndex);
     }
 
 }
