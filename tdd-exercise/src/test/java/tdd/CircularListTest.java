@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,8 +15,9 @@ import java.util.List;
  */
 public class CircularListTest {
 
-    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3));
     private static final int MAX_SIZE = 3;
+    private static final int N_REMOVE = 2;
 
     private CircularQueue circularQueue;
 
@@ -35,6 +37,12 @@ public class CircularListTest {
         assertFalse(this.circularQueue.isEmpty());
     }
 
+    private void addValues() {
+        for (Integer value: VALUES) {
+            this.circularQueue.add(value);
+        }
+    }
+
     @Test
     public void getMaxSize() {
         assertEquals(MAX_SIZE, this.circularQueue.getMaxSize());
@@ -42,7 +50,7 @@ public class CircularListTest {
 
     @Test
     public void canAddAndPeek() {
-        this.circularQueue.add(VALUES.get(0));
+        addValues();
         assertEquals(VALUES.get(0), this.circularQueue.peek());
     }
 
@@ -53,8 +61,7 @@ public class CircularListTest {
 
     @Test
     public void canAddAndRemove() {
-        this.circularQueue.add(VALUES.get(0));
-        this.circularQueue.add(VALUES.get(1));
+        addValues();
         assertAll(
                 () -> {
                     assertEquals(VALUES.get(0), this.circularQueue.remove());
@@ -70,10 +77,13 @@ public class CircularListTest {
 
     @Test
     public void getCorrectCurrentSize() {
-        this.circularQueue.add(VALUES.get(0));
-        this.circularQueue.add(VALUES.get(1));
-        this.circularQueue.remove();
-        assertEquals(1, this.circularQueue.getCurrentSize());
+        addValues();
+        for (int i = 0; i < N_REMOVE; i++) {
+            this.circularQueue.remove();
+        }
+        assertEquals(VALUES.size() - N_REMOVE, this.circularQueue.getCurrentSize());
     }
+
+
 
 }
