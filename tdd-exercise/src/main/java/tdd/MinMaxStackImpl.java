@@ -32,11 +32,15 @@ public class MinMaxStackImpl implements MinMaxStack {
         updateMaxStack(value);
     }
 
-    @Override
-    public int pop() {
+    private void checkIfStackEmpty() {
         if (this.stack.isEmpty()) {
             throw new IllegalStateException("Can't pop when the stack is empty.");
         }
+    }
+
+    @Override
+    public int pop() {
+        checkIfStackEmpty();
         this.minStack.pop();
         this.maxStack.pop();
         return this.stack.pop();
@@ -44,25 +48,19 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int peek() {
-        if (this.stack.peek() == null) {
-            throw new IllegalStateException("Can't peek when the stack is empty.");
-        }
+        checkIfStackEmpty();
         return this.stack.peek();
     }
 
     @Override
     public int getMin() {
-        if (this.minStack.isEmpty()) {
-            throw new IllegalStateException("Can't get the minimum value when the stack is empty.");
-        }
+        checkIfStackEmpty();
         return this.minStack.peek();
     }
 
     @Override
     public int getMax() {
-        if (this.maxStack.isEmpty()) {
-            throw new IllegalStateException("Can't get the maximum value when the stack is empty.");
-        }
+        checkIfStackEmpty();
         return this.maxStack.peek();
     }
 
