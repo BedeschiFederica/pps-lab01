@@ -29,5 +29,11 @@ public interface CircularQueue {
      */
     void add(int value);
 
+    /**
+     * Gets the maximum size of the circular queue.
+     *
+     * @return The maximum size of the circular queue.
+     */
     int getMaxSize();
+
 }
