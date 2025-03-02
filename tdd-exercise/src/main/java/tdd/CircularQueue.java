@@ -15,6 +15,10 @@ package tdd;
  */
 public interface CircularQueue {
 
+    /**
+     * Checks if the circular queue is empty.
+     *
+     * @return true if the circular queue is empty, false otherwise.
+     */
     boolean isEmpty();
-
 }
