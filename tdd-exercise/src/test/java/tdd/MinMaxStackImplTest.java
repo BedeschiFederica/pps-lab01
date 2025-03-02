@@ -3,20 +3,21 @@ package tdd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class MinMaxStackImplTest {
 
+    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(2, 3, 4, 5));
+    private static final int MIN_VALUE = 1;
+    private static final int MAX_VALUE = 6;
+    private static final int N_POPS = 2;
 
-    public static final int FIRST_VALUE = 10;
-    public static final int SECOND_VALUE = 5;
-    public static final int THIRD_VALUE = 8;
-    public static final int EXPECTED_SIZE = 2;
-
-    MinMaxStack stack;
+    private MinMaxStack stack;
 
     @BeforeEach
     public void beforeEach() {
@@ -30,20 +31,20 @@ class MinMaxStackImplTest {
 
     @Test
     public void IsNotEmptyAfterPush() {
-        this.stack.push(FIRST_VALUE);
+        this.stack.push(VALUES.get(0));
         assertFalse(this.stack.isEmpty());
     }
 
-    private void pushThreeValues() {
-        this.stack.push(FIRST_VALUE);
-        this.stack.push(SECOND_VALUE);
-        this.stack.push(THIRD_VALUE);
+    private void pushValues() {
+        for (Integer value: VALUES) {
+            this.stack.push(value);
+        }
     }
 
     @Test
     public void canPushAndPeek() {
-        pushThreeValues();
-        assertEquals(THIRD_VALUE, this.stack.peek());
+        pushValues();
+        assertEquals(VALUES.get(VALUES.size() - 1), this.stack.peek());
     }
 
     @Test
@@ -53,11 +54,11 @@ class MinMaxStackImplTest {
 
     @Test
     public void canPushAndPop() {
-        pushThreeValues();
+        pushValues();
         assertAll(
                 () -> {
-                    assertEquals(THIRD_VALUE, this.stack.pop());
-                    assertEquals(SECOND_VALUE, this.stack.peek());
+                    assertEquals(VALUES.get(VALUES.size() - 1), this.stack.pop());
+                    assertEquals(VALUES.get(VALUES.size() - 2), this.stack.peek());
                 }
         );
     }
@@ -69,23 +70,28 @@ class MinMaxStackImplTest {
 
     @Test
     public void getCorrectSize() {
-        pushThreeValues();
-        this.stack.pop();
-        assertEquals(EXPECTED_SIZE, this.stack.size());
+        pushValues();
+        for (int i = 0; i < N_POPS; i++) {
+            this.stack.pop();
+        }
+        assertEquals(VALUES.size() - N_POPS, this.stack.size());
     }
 
     @Test
     public void getCorrectMinValueAfterPush() {
-        pushThreeValues();
-        assertEquals(Collections.min(Arrays.asList(FIRST_VALUE, SECOND_VALUE, THIRD_VALUE)), this.stack.getMin());
+        pushValues();
+        this.stack.push(MIN_VALUE);
+        this.stack.push(MAX_VALUE);
+        assertEquals(MIN_VALUE, this.stack.getMin());
     }
 
     @Test
     public void getCorrectMinValueAfterPoppingTheMin() {
-        pushThreeValues();
+        pushValues();
+        this.stack.push(MIN_VALUE);
+        this.stack.push(MAX_VALUE);
         this.stack.pop();
         this.stack.pop();
-        assertEquals(Collections.min(Arrays.asList(FIRST_VALUE)), this.stack.getMin());
+        assertEquals(Collections.min(VALUES), this.stack.getMin());
     }
-
 }
