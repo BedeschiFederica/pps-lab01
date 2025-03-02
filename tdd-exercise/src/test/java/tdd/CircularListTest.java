@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +14,9 @@ import java.util.List;
  */
 public class CircularListTest {
 
-    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3));
+    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     private static final int MAX_SIZE = 3;
+    private static final int START = 0;
     private static final int N_REMOVE = 2;
 
     private CircularQueue circularQueue;
@@ -33,13 +33,13 @@ public class CircularListTest {
 
     @Test
     public void isNotEmptyAfterAdd() {
-        this.circularQueue.add(VALUES.get(0));
+        this.circularQueue.add(VALUES.get(START));
         assertFalse(this.circularQueue.isEmpty());
     }
 
-    private void addValues() {
-        for (Integer value: VALUES) {
-            this.circularQueue.add(value);
+    private void addMaxSizeValues(final int from) {
+        for (int i = from; i < from + MAX_SIZE; i++) {
+            this.circularQueue.add(VALUES.get(i));
         }
     }
 
@@ -50,8 +50,8 @@ public class CircularListTest {
 
     @Test
     public void canAddAndPeek() {
-        addValues();
-        assertEquals(VALUES.get(0), this.circularQueue.peek());
+        addMaxSizeValues(START);
+        assertEquals(VALUES.get(START), this.circularQueue.peek());
     }
 
     @Test
@@ -61,11 +61,11 @@ public class CircularListTest {
 
     @Test
     public void canAddAndRemove() {
-        addValues();
+        addMaxSizeValues(START);
         assertAll(
                 () -> {
-                    assertEquals(VALUES.get(0), this.circularQueue.remove());
-                    assertEquals(VALUES.get(1), this.circularQueue.peek());
+                    assertEquals(VALUES.get(START), this.circularQueue.remove());
+                    assertEquals(VALUES.get(START + 1), this.circularQueue.peek());
                 }
         );
     }
@@ -77,13 +77,11 @@ public class CircularListTest {
 
     @Test
     public void getCorrectCurrentSize() {
-        addValues();
+        addMaxSizeValues(START);
         for (int i = 0; i < N_REMOVE; i++) {
             this.circularQueue.remove();
         }
-        assertEquals(VALUES.size() - N_REMOVE, this.circularQueue.getCurrentSize());
+        assertEquals(MAX_SIZE - N_REMOVE, this.circularQueue.getCurrentSize());
     }
-
-
 
 }
