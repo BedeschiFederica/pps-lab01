@@ -22,5 +22,10 @@ public interface CircularQueue {
      */
     boolean isEmpty();
 
+    /**
+     * Adds an integer to the circular queue.
+     *
+     * @param value The integer to add
+     */
     void add(int value);
 }
