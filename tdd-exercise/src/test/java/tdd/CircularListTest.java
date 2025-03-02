@@ -103,4 +103,12 @@ public class CircularListTest {
         );
     }
 
+    @Test
+    public void canOverflowMore() {
+        addMaxSizeValues(START);
+        this.circularQueue.add(VALUES.get(MAX_SIZE));
+        this.circularQueue.add(VALUES.get(MAX_SIZE + 1));
+        assertEquals(VALUES.get(START + 2), this.circularQueue.peek());
+    }
+
 }

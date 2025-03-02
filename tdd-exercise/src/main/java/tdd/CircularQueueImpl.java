@@ -20,11 +20,24 @@ public class CircularQueueImpl implements CircularQueue {
         return this.currentSize == 0;
     }
 
-    private void updateIndexes() {
+    private void incrementFirstIndex() {
+        this.firstIndex++;
+        if (this.firstIndex == this.maxSize) {
+            this.firstIndex = 0;
+        }
+    }
+
+    private void incrementLastIndex() {
         this.lastIndex++;
         if (this.lastIndex == this.maxSize) {
             this.lastIndex = 0;
-            this.firstIndex++;
+        }
+    }
+
+    private void updateIndexes() {
+        incrementLastIndex();
+        if (this.lastIndex == this.firstIndex) {
+            incrementFirstIndex();
         }
     }
 
