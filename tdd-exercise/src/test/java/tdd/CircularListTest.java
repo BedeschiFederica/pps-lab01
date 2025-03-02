@@ -51,4 +51,16 @@ public class CircularListTest {
         assertThrows(IllegalStateException.class, () -> this.circularQueue.peek());
     }
 
+    @Test
+    public void canAddAndRemove() {
+        this.circularQueue.add(VALUES.get(0));
+        this.circularQueue.add(VALUES.get(1));
+        assertAll(
+                () -> {
+                    assertEquals(VALUES.get(0), this.circularQueue.remove());
+                    assertEquals(VALUES.get(1), this.circularQueue.peek());
+                }
+        );
+    }
+
 }

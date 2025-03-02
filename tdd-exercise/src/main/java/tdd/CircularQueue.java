@@ -44,4 +44,5 @@ public interface CircularQueue {
      */
     int peek();
 
+    int remove();
 }

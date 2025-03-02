@@ -38,4 +38,11 @@ public class CircularQueueImpl implements CircularQueue {
         return this.circularQueue.get(firstIndex);
     }
 
+    @Override
+    public int remove() {
+        final int value = this.circularQueue.get(firstIndex);
+        firstIndex++;
+        return value;
+    }
+
 }
