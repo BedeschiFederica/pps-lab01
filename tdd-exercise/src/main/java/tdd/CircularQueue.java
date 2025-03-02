@@ -52,4 +52,11 @@ public interface CircularQueue {
      */
     int remove();
 
+    /**
+     * Gets the current size of the circular queue.
+     *
+     * @return The current size of the circular queue.
+     */
+    int getCurrentSize();
+
 }

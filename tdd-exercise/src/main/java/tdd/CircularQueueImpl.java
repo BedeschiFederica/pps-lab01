@@ -39,15 +39,21 @@ public class CircularQueueImpl implements CircularQueue {
     @Override
     public int peek() {
         checkIfEmpty();
-        return this.circularQueue.get(firstIndex);
+        return this.circularQueue.get(this.firstIndex);
     }
 
     @Override
     public int remove() {
         checkIfEmpty();
-        final int value = this.circularQueue.get(firstIndex);
-        firstIndex++;
+        final int value = this.circularQueue.get(this.firstIndex);
+        this.firstIndex++;
+        this.currentSize--;
         return value;
+    }
+
+    @Override
+    public int getCurrentSize() {
+        return this.currentSize;
     }
 
 }

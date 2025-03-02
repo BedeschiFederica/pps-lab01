@@ -68,4 +68,12 @@ public class CircularListTest {
         assertThrows(IllegalStateException.class, () -> this.circularQueue.remove());
     }
 
+    @Test
+    public void getCorrectCurrentSize() {
+        this.circularQueue.add(VALUES.get(0));
+        this.circularQueue.add(VALUES.get(1));
+        this.circularQueue.remove();
+        assertEquals(1, this.circularQueue.getCurrentSize());
+    }
+
 }
