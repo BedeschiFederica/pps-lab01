@@ -46,4 +46,9 @@ public class CircularListTest {
         assertEquals(VALUES.get(0), this.circularQueue.peek());
     }
 
+    @Test
+    public void cantPeekIfEmpty() {
+        assertThrows(IllegalStateException.class, () -> this.circularQueue.peek());
+    }
+
 }

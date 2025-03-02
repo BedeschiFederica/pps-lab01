@@ -7,6 +7,7 @@ public class CircularQueueImpl implements CircularQueue {
 
     private final List<Integer> circularQueue = new ArrayList<>();
     private final int maxSize;
+    private int currentSize = 0;
     private int firstIndex;
 
     public CircularQueueImpl(final int maxSize) {
@@ -21,6 +22,7 @@ public class CircularQueueImpl implements CircularQueue {
     @Override
     public void add(final int value) {
         this.circularQueue.add(value);
+        this.currentSize++;
     }
 
     @Override
@@ -30,6 +32,9 @@ public class CircularQueueImpl implements CircularQueue {
 
     @Override
     public int peek() {
+        if (this.currentSize == 0) {
+            throw new IllegalStateException("Can't peek when the circular queue is empty.");
+        }
         return this.circularQueue.get(firstIndex);
     }
 
