@@ -21,4 +21,6 @@ public interface CircularQueue {
      * @return true if the circular queue is empty, false otherwise.
      */
     boolean isEmpty();
+
+    void add(int value);
 }
