@@ -60,6 +60,9 @@ public class MinMaxStackImpl implements MinMaxStack {
 
     @Override
     public int getMax() {
+        if (this.maxStack.isEmpty()) {
+            throw new IllegalStateException("Can't get the maximum value when the stack is empty.");
+        }
         return this.maxStack.peek();
     }
 
