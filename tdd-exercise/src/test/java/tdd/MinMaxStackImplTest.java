@@ -108,4 +108,14 @@ class MinMaxStackImplTest {
         assertEquals(MAX_VALUE, this.stack.getMax());
     }
 
+    @Test
+    public void getCorrectMaxValueAfterPoppingTheMax() {
+        pushValues();
+        this.stack.push(MAX_VALUE);
+        this.stack.push(MIN_VALUE);
+        this.stack.pop();
+        this.stack.pop();
+        assertEquals(Collections.max(VALUES), this.stack.getMax());
+    }
+
 }
