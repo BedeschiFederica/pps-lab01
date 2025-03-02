@@ -15,12 +15,13 @@ import java.util.List;
 public class CircularListTest {
 
     private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+    private static final int MAX_SIZE = 3;
 
     private CircularQueue circularQueue;
 
     @BeforeEach
     public void beforeEach() {
-        this.circularQueue = new CircularQueueImpl();
+        this.circularQueue = new CircularQueueImpl(MAX_SIZE);
     }
 
     @Test
@@ -32,6 +33,11 @@ public class CircularListTest {
     public void isNotEmptyAfterAdd() {
         this.circularQueue.add(VALUES.get(0));
         assertFalse(this.circularQueue.isEmpty());
+    }
+
+    @Test
+    public void getMaxSize() {
+        assertEquals(MAX_SIZE, this.circularQueue.getMaxSize());
     }
 
 }

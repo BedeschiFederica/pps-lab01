@@ -28,4 +28,6 @@ public interface CircularQueue {
      * @param value The integer to add
      */
     void add(int value);
+
+    int getMaxSize();
 }
