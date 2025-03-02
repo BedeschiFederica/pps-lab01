@@ -17,7 +17,7 @@ public class CircularListTest {
     private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
     private static final int MAX_SIZE = 3;
     private static final int START = 0;
-    private static final int N_REMOVE = 2;
+    private static final int N_REMOVE_FOR_CURRENT_SIZE = 2;
     private static final int N_REMOVE_WHEN_OVERFLOWED = MAX_SIZE - 1;
 
     private CircularQueue circularQueue;
@@ -79,10 +79,10 @@ public class CircularListTest {
     @Test
     public void getCorrectCurrentSize() {
         addMaxSizeValues(START);
-        for (int i = 0; i < N_REMOVE; i++) {
+        for (int i = 0; i < N_REMOVE_FOR_CURRENT_SIZE; i++) {
             this.circularQueue.remove();
         }
-        assertEquals(MAX_SIZE - N_REMOVE, this.circularQueue.getCurrentSize());
+        assertEquals(MAX_SIZE - N_REMOVE_FOR_CURRENT_SIZE, this.circularQueue.getCurrentSize());
     }
 
     @Test
@@ -138,6 +138,16 @@ public class CircularListTest {
                     assertEquals(VALUES.get(MAX_SIZE), this.circularQueue.peek());
                 }
         );
+    }
+
+    @Test
+    public void getCorrectCurrentSizeWhenOverflowed() {
+        addMaxSizeValues(START);
+        addMaxSizeValues(MAX_SIZE);
+        for (int i = 0; i < N_REMOVE_FOR_CURRENT_SIZE; i++) {
+            this.circularQueue.remove();
+        }
+        assertEquals(MAX_SIZE - N_REMOVE_FOR_CURRENT_SIZE, this.circularQueue.getCurrentSize());
     }
 
 }

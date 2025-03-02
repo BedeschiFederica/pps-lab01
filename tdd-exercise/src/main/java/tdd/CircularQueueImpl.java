@@ -49,11 +49,18 @@ public class CircularQueueImpl implements CircularQueue {
         }
     }
 
+    private void updateCurrentSize() {
+        this.currentSize++;
+        if (this.currentSize > this.maxSize) {
+            this.currentSize = this.maxSize;
+        }
+    }
+
     @Override
     public void add(final int value) {
         updateIndexes();
         addValue(value);
-        this.currentSize++;
+        updateCurrentSize();
     }
 
     @Override
