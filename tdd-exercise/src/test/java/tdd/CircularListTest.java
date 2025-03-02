@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class CircularListTest {
 
-    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+    private static final List<Integer> VALUES = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
     private static final int MAX_SIZE = 3;
     private static final int START = 0;
     private static final int N_REMOVE = 2;
@@ -89,6 +89,18 @@ public class CircularListTest {
         addMaxSizeValues(START);
         this.circularQueue.add(VALUES.get(MAX_SIZE));
         assertEquals(VALUES.get(START + 1), this.circularQueue.peek());
+    }
+
+    @Test
+    public void canRemoveWhenOverflowed() {
+        addMaxSizeValues(START);
+        this.circularQueue.add(VALUES.get(MAX_SIZE));
+        assertAll(
+                () -> {
+                    assertEquals(VALUES.get(START + 1), this.circularQueue.remove());
+                    assertEquals(VALUES.get(START + 2), this.circularQueue.peek());
+                }
+        );
     }
 
 }
