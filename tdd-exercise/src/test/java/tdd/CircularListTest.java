@@ -84,4 +84,11 @@ public class CircularListTest {
         assertEquals(MAX_SIZE - N_REMOVE, this.circularQueue.getCurrentSize());
     }
 
+    @Test
+    public void canOverflow() {
+        addMaxSizeValues(START);
+        this.circularQueue.add(VALUES.get(MAX_SIZE));
+        assertEquals(VALUES.get(START + 1), this.circularQueue.peek());
+    }
+
 }

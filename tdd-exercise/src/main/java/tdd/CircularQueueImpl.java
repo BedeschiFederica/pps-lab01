@@ -8,7 +8,8 @@ public class CircularQueueImpl implements CircularQueue {
     private final List<Integer> circularQueue = new ArrayList<>();
     private final int maxSize;
     private int currentSize = 0;
-    private int firstIndex;
+    private int firstIndex = 0;
+    private int lastIndex = -1;
 
     public CircularQueueImpl(final int maxSize) {
         this.maxSize = maxSize;
@@ -19,9 +20,26 @@ public class CircularQueueImpl implements CircularQueue {
         return this.currentSize == 0;
     }
 
+    private void updateIndexes() {
+        this.lastIndex++;
+        if (this.lastIndex == this.maxSize) {
+            this.lastIndex = 0;
+            this.firstIndex++;
+        }
+    }
+
+    private void addValue(final int value) {
+        if (this.lastIndex < this.circularQueue.size()) {
+            this.circularQueue.set(this.lastIndex, value);
+        } else {
+            this.circularQueue.add(value);
+        }
+    }
+
     @Override
     public void add(final int value) {
-        this.circularQueue.add(value);
+        updateIndexes();
+        addValue(value);
         this.currentSize++;
     }
 
