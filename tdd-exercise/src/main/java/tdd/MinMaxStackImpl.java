@@ -2,13 +2,12 @@ package tdd;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
 
 public class MinMaxStackImpl implements MinMaxStack {
 
-    private Deque<Integer> stack = new ArrayDeque<>();
-    private Deque<Integer> minStack = new ArrayDeque<>();
-    private Deque<Integer> maxStack = new ArrayDeque<>();
+    private final Deque<Integer> stack = new ArrayDeque<>();
+    private final Deque<Integer> minStack = new ArrayDeque<>();
+    private final Deque<Integer> maxStack = new ArrayDeque<>();
 
     private void updateMinStack(final int value) {
         if (this.minStack.isEmpty() || value < this.minStack.peek()) {
