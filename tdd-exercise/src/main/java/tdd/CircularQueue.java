@@ -44,5 +44,12 @@ public interface CircularQueue {
      */
     int peek();
 
+    /**
+     * Removes and returns the first element of the circular queue.
+     *
+     * @return The removed element.
+     * @throws IllegalStateException if the circular queue is empty.
+     */
     int remove();
+
 }
