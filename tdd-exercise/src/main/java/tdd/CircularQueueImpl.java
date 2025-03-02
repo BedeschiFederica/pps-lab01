@@ -16,7 +16,7 @@ public class CircularQueueImpl implements CircularQueue {
 
     @Override
     public boolean isEmpty() {
-        return this.circularQueue.isEmpty();
+        return this.currentSize == 0;
     }
 
     @Override
@@ -30,19 +30,21 @@ public class CircularQueueImpl implements CircularQueue {
         return this.maxSize;
     }
 
+    private void checkIfEmpty() {
+        if (this.isEmpty()) {
+            throw new IllegalStateException("Can't perform the operation when the circular queue is empty.");
+        }
+    }
+
     @Override
     public int peek() {
-        if (this.currentSize == 0) {
-            throw new IllegalStateException("Can't peek when the circular queue is empty.");
-        }
+        checkIfEmpty();
         return this.circularQueue.get(firstIndex);
     }
 
     @Override
     public int remove() {
-        if (this.currentSize == 0) {
-            throw new IllegalStateException("Can't remove when the circular queue is empty.");
-        }
+        checkIfEmpty();
         final int value = this.circularQueue.get(firstIndex);
         firstIndex++;
         return value;
